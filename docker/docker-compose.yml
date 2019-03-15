@@ -1,0 +1,18 @@
+version: '3'
+services:
+  DB:
+    image: mariadb:latest
+    container_name: DB
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_USER: app
+      MYSQL_PASSWORD: pass
+      MYSQL_ROOT_PASSWORD: passr
+      MYSQL_DATABASE: hermes
+    
+    volumes:
+      - ./db:/var/lib/mysql
+  
+  
+
