@@ -5,6 +5,8 @@ from tensorflow.keras.utils import to_categorical
 import random
 from PIL import Image
 import numpy as np
+from sklearn.model_selection import train_test_split
+
 
 #tf.enable_eager_execution()
 #AUTOTUNE = tf.data.experimental.AUTOTUNE
@@ -18,6 +20,11 @@ class DataSet(object):
         # self.label_ds = None
         self.image_ds = []
         self.label_ds = []
+
+        self.train_X = []
+        self.train_Y = []
+        self.test_X = []
+        self.test_Y = []
         
         
         data_root = pathlib.Path(path)
@@ -35,7 +42,11 @@ class DataSet(object):
 
         self.processesImage()
         #self.imagesToArray()
-        self.labelsToOneHot()    
+        self.labelsToOneHot()   
+        self.splitDataSet() 
+
+        print(self.label_names)
+        print(self.label_index)
 
     def processesImage(self):
         images = []
@@ -55,8 +66,8 @@ class DataSet(object):
         self.image_ds = self.image_ds.astype('float32')
         self.image_ds /= 255
 
-        print(self.image_ds)
-
+    def splitDataSet(self,proportion=0.3):
+        self.train_X,self.test_X,self.train_Y,self.test_Y = train_test_split(self.image_ds, self.label_ds, test_size=proportion,shuffle=False)        
 
     def imagesToArray(self):
         print("Convirtiendo imagenes en matriz numpy")

@@ -12,10 +12,12 @@ if __name__ == "__main__":
     dataset = data.DataSet('./data')
     network = model.NeuralNetwork('./logdir')
 
-    print(dataset.image_ds.dtype)
+    
     
     if not network.isAlive:
         network.trainModel(dataset)
+    else:
+        network.saveModel()
     
     # probar
     test_loss, test_acc = network.model.evaluate(dataset.image_ds,dataset.label_ds)
