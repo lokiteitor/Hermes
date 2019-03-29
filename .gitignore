@@ -65,6 +65,7 @@ training/trainingCNN
 training/data/*
 training/logdir
 training/model
+docker/icescrum/*
 
 # Created by https://www.gitignore.io/api/python
 # Edit at https://www.gitignore.io/?templates=python

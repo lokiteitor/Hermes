@@ -4,15 +4,24 @@ services:
     image: mariadb:latest
     container_name: DB
     ports:
-      - '3306:3306'
+      - 3306
     environment:
       MYSQL_USER: app
       MYSQL_PASSWORD: pass
       MYSQL_ROOT_PASSWORD: passr
-      MYSQL_DATABASE: hermes
+      MYSQL_DATABASE: icescrum
     
     volumes:
       - ./db:/var/lib/mysql
   
-  
-
+  icescrum:
+    image: icescrum/icescrum:latest
+    container_name: icescrum
+    volumes:
+      - ./icescrum:/root
+    ports:
+      - "8080:8080"
+    depends_on:
+      - DB
+    links:
+      - DB:mysql
