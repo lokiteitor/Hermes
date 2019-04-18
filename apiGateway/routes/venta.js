@@ -7,12 +7,13 @@ var config = require('../config');
 router.post('/',function (req,res,next) {
     // crear la venta por lotes
     // crear venta
+
     let ticket = {
         venta:{
-            usuario_id: req.param("usuario")
-        },
-        productos: req.param("productos")
-    }    
+            user_id:req.body.usuario,
+            productos:req.body.productos
+        }
+    }
 
     let options = {
         url: config.URL+'/venta',

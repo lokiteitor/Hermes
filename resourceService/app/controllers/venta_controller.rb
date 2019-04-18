@@ -20,11 +20,13 @@ class VentaController < ApplicationController
     resultado = {:venta=>{},:productos=>[]}
     vres = @ventum.save
     if vres
-      params[:productos].each do |value|
-        # por cada producto guardar un registro
-        registro = VentaRegistro.new(producto_id:value[:producto_id],cantidad:value[:cantidad])
-        registro.save      
-        resultado[:productos].push(registro)
+      @ventas.each do |value|
+        if disponibilidad value
+          # por cada producto guardar un registro
+          registro = RegistroVentum.new(producto_id:value[:producto_id],cantidad:value[:cantidad],ventum_id:@ventum.id)
+          registro.save      
+          resultado[:productos].push(registro)          
+        end
       end
     end
         
@@ -58,6 +60,30 @@ class VentaController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def ventum_params
-      params.require(:venta).permit(:usuario_id)
+      @ventas = params[:venta][:productos]
+      puts @ventas      
+      params.require(:venta).permit(:user_id)
+    end
+
+    def disponibilidad producto
+      # revisar la diponibilidad de los productos requeridos 
+      # producto comparar registros con ventas
+      # buscar los registros en el inventario
+      cantidad = 0
+      flag = false
+      ProductoRegistro.where(producto_id: producto[:producto_id]).find_each do | registro |
+        cantidad += registro.cantidad
+      end
+      # buscar las ventas y restar los  registros
+      RegistroVentum.where(producto_id:producto[:producto_id]).find_each do | registro |
+        cantidad -= registro.cantidad
+      end
+
+      puts producto[:producto_id]
+      puts cantidad
+      if cantidad > 0
+        flag = true
+      end
+      return flag
     end
 end
