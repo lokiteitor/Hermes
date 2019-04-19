@@ -51,10 +51,11 @@ router.post('/',function (req,res,next) {
     if (response.statusCode == 200) {
       res.send(body);
     }
+    else if(response.statusCode == 201){
+      res.send(body);
+    }
     else{
-      console.log(error);
-      
-      res.send(body);      
+      res.sendStatus(response.statusCode);
     }
   })  
 })

@@ -6,6 +6,7 @@ import Router from 'vue-router'
 import Login from './views/login'
 import Inventario from './views/inventario'
 import Venta from './views/venta'
+import Registro from './views/registro'
 
 
 Vue.use(Router)
@@ -25,6 +26,10 @@ export default new Router({
     path: '/venta',
     name: 'Punto de venta',
     component: Venta
+  },{
+    path: '/registro',
+    name: 'Registro',
+    component: Registro
   }
   ]
 })

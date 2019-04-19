@@ -16,7 +16,7 @@ services:
     container_name: rabbitmqOdeja
     ports:
       - "5672:5672"
-      - "8080:15672"
+      - "8000:15672"
     environment:
       RABBITMQ_DEFAULT_USER: user
       RABBITMQ_DEFAULT_PASS: passr    

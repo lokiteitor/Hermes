@@ -1,23 +1,48 @@
 <template>
     <div class="container-fluid">
-        <h3>Sistema de inventario</h3>
+        <br>
+        <h3 class="text-center">Sistema de inventario</h3>
         <div class="row">
-            <div class="col-md-3 offset-md-1">
-                <img src="../assets/logo.png" class="img-thumbnail" alt="">
+
+            <imagen></imagen>
+            <div class="col-md-7">
+                <ul class="nav nav-tabs" id="menu" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="registro-tab" data-toggle="tab" href="#registro" role="tab" aria-controls="registro" aria-selected="true">Registro</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Informacion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="add-tab" data-toggle="tab" href="#add" role="tab" aria-controls="add" aria-selected="false">Añadir</a>
+                </li>
+                </ul>    
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="registro" role="tabpanel" aria-labelledby="registro-tab">
+                        <registro ></registro>
+                    </div>
+                    <div class="tab-pane fade" id="info" role="tabpanel" aria-labelledby="info-tab">
+                        <info></info>
+                    </div>
+                    <div class="tab-pane fade" id="add" role="tabpanel" aria-labelledby="add-tab">
+                        <registro v-bind:isregistro='true'></registro>
+                    </div>
+                </div>                                                
             </div>
-            <!-- <registro></registro> -->
-            <!-- <info></info> -->
-            <add></add>
+
         </div>
     </div>
 </template>
 <script>
-// import registro from './components/registroInventario'
-// import info from './components/infoInventario'
-import add from './components/addInventario'
+import registro from './components/registroInventario'
+import info from './components/infoInventario'
+import imagen from './components/imagen'
+
 export default {
     components:{
-        add
+        imagen,
+        registro,
+        info
     }
 }
 </script>
